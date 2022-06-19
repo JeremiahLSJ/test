@@ -16,10 +16,26 @@
         var sum = (a, b) => a + b;
         console.log(arr.reduce(sum, 0))
 
+
+
         // 利用reduce处理http://www.baidu.com/?name=zhangsan&age=18&sex=nan, 要求返回一个对象
         // { name:"zhangsan",age:18,sex:nan }
         const urlLoad = 'http://www.baidu.com/?name=zhangsan&age=18&sex=nan'
-        function process(url) {}
+        function process(url) {
+            const test = /[^?]+$/;
+            const newUrl = url.match(test)[0];
+            // console.log(newUrl)
+            const arr =  newUrl.split('&');
+            // console.log(arr)
+            const obj = {};
+            const change = (a,ele) => {
+                var newArr = ele.split('=');
+                obj[newArr[0]] = newArr[1];
+            }
+            arr.reduce(change,obj);
+            console.log(obj);
+        }
+        process(urlLoad);
     </script>
 </body>
 </html>
